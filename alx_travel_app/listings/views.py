@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from .serializers import ListingSerializer, BookingSerializer, ReviewSerializer, UserInfoSerializer, PaymentSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from listings.tasks import send_booking_confirmation_email
 import os
 import requests
 
@@ -90,6 +91,12 @@ class BookingViewSet(viewsets.ModelViewSet):
             user=request.user,
             total_price=listing.price_per_night * days,
             status="pending"
+        )
+
+        # Send booking confirmation email asynchronously
+        send_booking_confirmation_email.delay(
+            request.user.email,
+            str(booking.booking_id)
         )
 
         # create payment + get Chapa URL
