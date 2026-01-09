@@ -57,7 +57,6 @@ python manage.py migrate
 python manage.py createsuperuser
 python manage.py seed  # populate sample data
 docker-compose up -d
-python manage.py runserver
 ```
 
 - Start RabbitMQ with Docker:
