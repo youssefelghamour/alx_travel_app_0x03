@@ -94,10 +94,12 @@ class BookingViewSet(viewsets.ModelViewSet):
         )
 
         # Send booking confirmation email asynchronously
+        """
         send_booking_confirmation_email.delay(
             request.user.email,
             str(booking.booking_id)
         )
+        """
 
         # create payment + get Chapa URL
         payment = Payment.objects.create(

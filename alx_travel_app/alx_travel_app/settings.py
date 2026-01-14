@@ -173,3 +173,5 @@ CELERY_TIMEZONE = 'UTC'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@travelapp.com'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
